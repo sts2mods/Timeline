@@ -1,0 +1,14 @@
+# Build artifacts
+bin/
+obj/
+out/
+
+# Editor
+*.user
+.vs/
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
