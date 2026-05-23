@@ -3,7 +3,7 @@
   "name": "Timeline",
   "author": "austin",
   "description": "Combat timeline: see and hover every event (cards, attacks, relics, powers) that happened in the current fight, with what triggered each one and what resolved from it.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "has_pck": false,
   "has_dll": true,
   "affects_gameplay": false

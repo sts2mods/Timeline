@@ -897,24 +897,47 @@ public static class TimelinePanel
         }
         else
         {
-            var placeholder = new ColorRect
+            // Anything without a resolved icon falls back to the game's
+            // app icon — looks far better than a colored square with a
+            // single capital letter. Applies to System causes (e.g.
+            // "Hand draw") and anywhere actor icon resolution fails.
+            var fallback = TimelineIcons.SystemIcon();
+            if (fallback != null)
             {
-                Color = ColorForActorKind(actor.Kind),
-                AnchorRight = 1, AnchorBottom = 1,
-                MouseFilter = Control.MouseFilterEnum.Ignore,
-            };
-            cell.AddChild(placeholder);
-            var letter = new Label
+                var tr = new TextureRect
+                {
+                    Texture = fallback,
+                    AnchorRight = 1, AnchorBottom = 1,
+                    OffsetLeft = xShift, OffsetRight = xShift,
+                    StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+                    ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+                    MouseFilter = Control.MouseFilterEnum.Ignore,
+                };
+                cell.AddChild(tr);
+            }
+            else
             {
-                Text = ShortLabel(actor),
-                AnchorRight = 1, AnchorBottom = 1,
-                MouseFilter = Control.MouseFilterEnum.Ignore,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-            };
-            letter.AddThemeFontSizeOverride("font_size", (int)(size * 0.45f));
-            letter.AddThemeColorOverride("font_color", StsColors.cream);
-            cell.AddChild(letter);
+                // Truly nothing — preserve the colored-letter fallback
+                // as last resort so the row isn't blank.
+                var placeholder = new ColorRect
+                {
+                    Color = ColorForActorKind(actor.Kind),
+                    AnchorRight = 1, AnchorBottom = 1,
+                    MouseFilter = Control.MouseFilterEnum.Ignore,
+                };
+                cell.AddChild(placeholder);
+                var letter = new Label
+                {
+                    Text = ShortLabel(actor),
+                    AnchorRight = 1, AnchorBottom = 1,
+                    MouseFilter = Control.MouseFilterEnum.Ignore,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+                letter.AddThemeFontSizeOverride("font_size", (int)(size * 0.45f));
+                letter.AddThemeColorOverride("font_color", StsColors.cream);
+                cell.AddChild(letter);
+            }
         }
         // Multi-target count badge — overlay an "xN" label in the
         // bottom-right corner so the icon reads as "5 of these"

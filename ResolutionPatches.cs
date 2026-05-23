@@ -787,15 +787,29 @@ public static class CardPileCmd_Draw_Patch
         if (!TimelineMod.Enabled) return;
         decimal count = 1m;
         Player? player = null;
+        bool fromHandDraw = false;
         for (int i = 0; i < __args.Length; i++)
         {
             if (__args[i] is decimal d) count = d;
             else if (__args[i] is Player p) player = p;
+            else if (__args[i] is bool b) fromHandDraw = b;
         }
+        // fromHandDraw=true is the start-of-turn hand fill (called
+        // from CombatManager.StartTurn with `fromHandDraw: true`).
+        // Without explicit attribution here the draws would inherit
+        // the sticky ActiveCause — typically whatever relic just
+        // flashed during turn-start — so a heal relic that fired
+        // before the hand draw would (incorrectly) get credited
+        // with "drew N cards". Stamp the cause as System ("hand
+        // draw") so Leaf's NeedsOverride check keeps it intact
+        // (System isn't on the "too generic, replace me" list).
+        var cause = fromHandDraw
+            ? TimelineActor.Of(ActorKind.System, "Hand draw")
+            : TimelineActor.None;
         TimelineEmit.Leaf(new TimelineEvent
         {
             Effect = EffectKind.CardDrawn,
-            Cause = TimelineActor.None,
+            Cause = cause,
             Target = TimelineEmit.CreatureActor(player?.Creature),
             Amount = TimelineEmit.ToInt(count),
         });
