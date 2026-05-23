@@ -61,8 +61,9 @@ Requires .NET 9 SDK and a local copy of Slay the Spire 2.
 The build script compiles `Timeline.dll` and copies it + the manifest
 into your game's `mods/` folder.
 
-## Companion mods
+## All my STS2 mods
 
+- [Timeline](https://github.com/sts2mods/Timeline) — this mod.
 - [Retry](https://github.com/sts2mods/Retry) — replay any past run
   from any floor.
 - [Run Table](https://github.com/sts2mods/RunTable) — searchable
