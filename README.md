@@ -4,10 +4,11 @@ This is a timeline mod which shows the timeline of the events that happened in t
 
 
 timeline closed(default)
-<img width="569" height="576" alt="Screenshot 2026-05-23 at 2 28 35 PM" src="https://github.com/user-attachments/assets/a4105140-9e3a-4134-8d83-31392be40819" />
+<img width="1511" height="853" alt="Screenshot 2026-05-23 at 2 28 03 PM" src="https://github.com/user-attachments/assets/95620e57-1d7e-474c-93a0-67d103e5bd63" />
 
 timeline open(click anywhere on it to open it)
-<img width="1511" height="853" alt="Screenshot 2026-05-23 at 2 28 03 PM" src="https://github.com/user-attachments/assets/95620e57-1d7e-474c-93a0-67d103e5bd63" />
+<img width="569" height="576" alt="Screenshot 2026-05-23 at 2 28 35 PM" src="https://github.com/user-attachments/assets/a4105140-9e3a-4134-8d83-31392be40819" />
+
 
 if you have suggestions or find bugs leave them as issues here and I'll get to them.
 
